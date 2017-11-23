@@ -18,7 +18,7 @@ public class ShowModelSe implements ShowModel {
     @Override
     public void getData(final FinishListener finish) {
         ApiService service= RetrofitUtils.getInstance().getApiService("http://www.93.gov.cn/",ApiService.class);
-        Observable<News> observable=service.getData("0","0");
+        Observable<News> observable=service.getData();
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<News>() {

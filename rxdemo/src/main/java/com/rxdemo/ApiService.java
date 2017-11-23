@@ -11,7 +11,7 @@ import rx.Observable;
  */
 
 public interface ApiService {
-    @GET("93app/data.do")
-    Observable<News> getData(@Query("channelId") String id,@Query("startNum") String num);
-
+    @GET("93app/data.do?channelId=0&startNum=0")
+    Observable<News> getData();
+   // @Query("channelId") String id,@Query("startNum") String num
 }

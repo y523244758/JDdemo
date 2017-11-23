@@ -24,23 +24,29 @@ public class MainActivity extends AppCompatActivity implements ShowView{
 
     TextView tv;
     private ProgressBar mProgressBar;
-    private Button start;
+    private Button start,go;
     private Button pause;
     private VideoView videoView;
     JCVideoPlayerStandard jcVideoPlayerStandard;
     private TextView total;
     private int max;
     private DownloadUtil mDownloadUtil;
-    String urlString = "http://2449.vod.myqcloud.com/2449_22ca37a6ea9011e5acaaf51d105342e3.f20.mp4";
+    String urlString = "http://mirror.aarnet.edu.au/pub/TED-talks/911Mothers_2010W-480p.mp4";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //获取资源ID
+        videoView=(VideoView) findViewById(R.id.videoview);
+        //创建MediaController
+        final MediaController controller=new MediaController(this);
+
 
         tv= (TextView) findViewById(R.id.tv);
         total= (TextView) findViewById(R.id.textView);
         start= (Button) findViewById(R.id.start);
         pause= (Button) findViewById(R.id.delete);
+        go= (Button) findViewById(R.id.kaishi);
         mProgressBar= (ProgressBar) findViewById(R.id.progressBar);
 
         ShowPresenterSe sp=new ShowPresenterSe(this);
@@ -67,6 +73,18 @@ public class MainActivity extends AppCompatActivity implements ShowView{
             @Override
             public void downloadEnd() {
                 Toast.makeText(MainActivity.this,"下载完成",Toast.LENGTH_SHORT).show();
+
+                //加载路径
+                videoView.setVideoPath("mnt/sdcard/local/adc.mp4");
+
+                //绑定媒体控制器
+                videoView.setMediaController(controller);
+                //媒体控制器绑定videoView
+                controller.setAnchorView(videoView);
+
+                        //开始播放
+                        videoView.start();
+
             }
         });
 
@@ -90,6 +108,8 @@ public class MainActivity extends AppCompatActivity implements ShowView{
 
         jcVideoPlayerStandard= (JCVideoPlayerStandard) findViewById(R.id.jiecao_Player);
         jcVideoPlayerStandard.setUp(urlString,jcVideoPlayerStandard.SCREEN_LAYOUT_NORMAL,"播放视频");
+
+
 
 
 
