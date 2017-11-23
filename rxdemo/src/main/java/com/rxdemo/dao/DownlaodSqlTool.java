@@ -7,9 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by 大白 on 2017/11/21.
- */
+
 
 public class DownlaodSqlTool {
 
